@@ -7,6 +7,7 @@
 | | |
 |---|---|
 | Demo website | https://demo-ab1d2cbe.demo.rebuild.vn/ |
+| Repository | https://github.com/rebuildvn/demo-ab1d2cbe |
 | Original website | https://gyusachi.vn/ |
 | Project | demo-ab1d2cbe |
 | Language | vi |
@@ -38,9 +39,9 @@ The demo rebuilds **https://gyusachi.vn/** (host `gyusachi.vn`): its text (busin
 ## What the site says
 
 - Tagline: Hệ thống nhà hàng ẩm thực Gyusachi tại Đà Nẵng
-- About the business: CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ YAMANOTE quản lý và vận hành chuỗi nhà hàng Gyusachi tại Đà Nẵng, mang đến cho thực khách không gian ẩm thực hấp dẫn và dịch vụ đặt bàn chu đáo tại 4 cơ sở thuận tiện.
+- About the business: CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ YAMANOTE quản lý và vận hành chuỗi nhà hàng Gyusachi tại Đà Nẵng, mang đến trải nghiệm ẩm thực đặc sắc và dịch vụ đặt bàn chu đáo tại 4 cơ sở trung tâm.
 - Hero: Trải Nghiệm Ẩm Thực Gyusachi Tại Đà Nẵng
-- Services / products (3): Dịch vụ Đặt bàn Nhà hàng, Ẩm thực Thực đơn Gyusachi, Tổ chức Tiệc & Sự kiện
+- Services / products (4): Dịch vụ Đặt Bàn Trước, Thực Đơn Ẩm Thực Gyusachi, Đặt Tiệc & Hội Họp Gia Đình, Doanh Nghiệp, Chương Trình Khuyến Mãi & Ưu Đãi Ẩm Thực
 - Sections: hero, about, services, location, contact.
 
 ## Done
@@ -48,12 +49,13 @@ The demo rebuilds **https://gyusachi.vn/** (host `gyusachi.vn`): its text (busin
 - [x] 2026-10-16 — Lead received; the original website was read.
 - [x] Brand colors and fonts measured on the original website.
 - [x] Website generated from the Rebuild template (contact form, live chat, events, demo call-to-action), content by gemini.
+- [x] Rework round 1 (AI agent) — Thêm dịch vụ hoặc sản phẩm còn thiếu; Cải thiện bố cục trên điện thoại; Thêm hình ảnh phù hợp
 
 ## Planned
 
 - [ ] Deploy this version to the demo domain (the Rebuild worker polls about every 15 minutes).
 - [ ] Staff review of the demo in the SMEUp app: approve, reject, or request changes.
-- Change rounds left: **3 of 3** (after that the demo can only be approved or rejected).
+- Change rounds left: **2 of 3** (after that the demo can only be approved or rejected).
 - [ ] After approval: the demo link is emailed to the lead; they can ask for the contract or a call from the demo itself.
 - [ ] Production: the customer's own photos and logo, their domain, and the final content check.
 
