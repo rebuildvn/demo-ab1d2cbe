@@ -1,0 +1,20 @@
+/* Measured design of the business's current website (rebuild.vn design tokens). */
+@import url("https://fonts.googleapis.com/css?family=Merienda:400,500,600,700&display=swap");
+:root {
+  --color-primary: #a31e22;
+  --color-secondary: #008749;
+  --color-accent: #ff0000;
+  --color-background: #e08f14;
+  --color-bg: #e08f14;
+  --color-surface: #111111;
+  --color-text: #333333;
+  --color-muted: #ffffff;
+  --color-border: #a21e22;
+  --color-link: #fcb040;
+  --font-body: "Merienda", system-ui, sans-serif;
+  --font: "Merienda", system-ui, sans-serif;
+  --font-heading: "Merienda", system-ui, sans-serif;
+  --font-size-body: 13px;
+  --radius-pill: 9999px;
+  --container: 1280px;
+}
