@@ -1,0 +1,16 @@
+{
+  "projectId": "14289415018840194869",
+  "title": "gyusachi-vn",
+  "screens": {
+    "home-desktop": {
+      "id": "8260fa20951d482fb2f8ebf616015395",
+      "title": "Trang Chủ - GYUSACHI Nhà Hàng Nướng Nhật",
+      "path": "stitch/export/home-desktop.html"
+    },
+    "home-mobile": {
+      "id": "f886893a9f9f4669962a556d2a0bade7",
+      "title": "GYUSACHI Mobile - Đặt Bàn Nhanh",
+      "path": "stitch/export/home-mobile.html"
+    }
+  }
+}

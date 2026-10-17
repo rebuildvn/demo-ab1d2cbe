@@ -50,6 +50,7 @@ The demo rebuilds **https://gyusachi.vn/** (host `gyusachi.vn`): its text (busin
 - [x] Brand colors and fonts measured on the original website.
 - [x] Website generated from the Rebuild template (contact form, live chat, events, demo call-to-action), content by gemini.
 - [x] Rework round 1 (AI agent) — Thêm dịch vụ hoặc sản phẩm còn thiếu; Cải thiện bố cục trên điện thoại; Thêm hình ảnh phù hợp
+- [x] 2026-10-17 — Stitch project **gyusachi-vn** connected via MCP; homepage rebuilt from Stitch export with SMEUp demo integration
 
 ## Planned
 
@@ -59,9 +60,28 @@ The demo rebuilds **https://gyusachi.vn/** (host `gyusachi.vn`): its text (busin
 - [ ] After approval: the demo link is emailed to the lead; they can ask for the contract or a call from the demo itself.
 - [ ] Production: the customer's own photos and logo, their domain, and the final content check.
 
+## Google Stitch (`gyusachi-vn`)
+
+| | |
+|---|---|
+| Stitch project | `gyusachi-vn` (ID `14289415018840194869`) |
+| MCP endpoint | `https://stitch.googleapis.com/mcp` |
+| Desktop screen | `Trang Chủ - GYUSACHI Nhà Hàng Nướng Nhật` → `stitch/export/home-desktop.html` |
+| Mobile screen | `GYUSACHI Mobile - Đặt Bàn Nhanh` → `stitch/export/home-mobile.html` |
+
+The live demo homepage is built from Stitch, then patched with Rebuild/SMEUp hooks (booking → lead API, demo CTA dialogs, live chat).
+
+```bash
+export STITCH_API_KEY='…'   # Stitch Settings → API Keys (never commit)
+npm run stitch:pull         # sync from MCP + rebuild index.html
+npm run serve               # http://127.0.0.1:43123
+```
+
+Copy `.cursor/mcp.json.example` → `.cursor/mcp.json` and set `X-Goog-Api-Key` for Cursor MCP. The previous Rebuild template page is kept at `legacy/rebuild-index.html`.
+
 ## Working on this repo
 
-- It is a plain static site (HTML, CSS, vanilla JS): `index.html`, `404.html`, `assets/`, `robots.txt`, `sitemap.xml`. Pushes to `main` are deployed to the demo domain by the Rebuild worker (a few minutes to ~15 minutes).
-- An AI rework round regenerates the **whole** site from its stored content and the feedback and replaces every file here. A person who fixes the repo by hand should edit the files directly, push, and tap *Mark fixed* in the SMEUp app; that person should also update this README.
-- Never put secrets here: the repository is public.
+- Static site: `index.html` (Stitch build), `404.html`, `assets/`, `stitch/`, `robots.txt`, `sitemap.xml`. Pushes to `main` deploy to the demo domain via the Rebuild worker (a few minutes to ~15 minutes).
+- An AI rework round may replace files from stored content; hand edits should update this README and use *Mark fixed* in SMEUp when done.
+- Never commit API keys or tokens; the repository is public.
 

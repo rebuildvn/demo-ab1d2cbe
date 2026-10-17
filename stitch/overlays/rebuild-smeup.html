@@ -1,0 +1,41 @@
+<section class="w-full bg-[#1c1b1b] border-y border-koge-border py-16 px-gutter text-center" id="demo-cta" aria-labelledby="demo-cta-title">
+  <span class="inline-block px-3 py-1 rounded bg-crimson-enso/20 text-flame-amber font-label-md text-label-md uppercase tracking-wider mb-4">Bản demo</span>
+  <h2 id="demo-cta-title" class="font-headline-md text-headline-md text-washi-cream mb-3">Bạn hài lòng với website này?</h2>
+  <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-8">Đặt lịch ký hợp đồng để website chính thức hoạt động, hoặc trao đổi với đội ngũ Rebuild nếu bạn muốn chỉnh sửa.</p>
+  <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+    <button type="button" class="px-6 py-3 bg-crimson-enso hover:bg-crimson-glow text-washi-cream font-label-lg uppercase tracking-wider rounded shadow-lg transition-colors" data-smeup-cta="contract" data-cta-placement="final">Tôi đồng ý – Đặt lịch ký hợp đồng</button>
+    <button type="button" class="px-6 py-3 border border-koge-border text-washi-cream hover:border-flame-amber font-label-lg uppercase tracking-wider rounded transition-colors" data-smeup-cta="cooperation" data-cta-placement="final">Tôi muốn trao đổi / chỉnh sửa</button>
+  </div>
+</section>
+<dialog class="rebuild-dialog" id="smeup-dialog-contract" aria-labelledby="smeup-dialog-contract-title" data-smeup-dialog="contract">
+  <form class="lead-form rebuild-form" data-smeup-form="demo_contract_request" data-message-required="false" novalidate>
+    <button class="rebuild-dialog-close" type="button" data-dialog-close aria-label="Đóng">×</button>
+    <h2 id="smeup-dialog-contract-title">Đặt lịch ký hợp đồng</h2>
+    <p>Để lại thông tin, đội ngũ Rebuild sẽ gọi lại để chốt lịch ký hợp đồng và đưa website lên tên miền của bạn.</p>
+    <div class="rebuild-field"><label for="contract-name">Họ và tên <span class="req">(bắt buộc)</span></label><input id="contract-name" name="name" type="text" autocomplete="name" maxlength="255" required></div>
+    <div class="rebuild-field-row">
+      <div class="rebuild-field"><label for="contract-phone">Số điện thoại</label><input id="contract-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20"></div>
+      <div class="rebuild-field"><label for="contract-email">Email</label><input id="contract-email" name="email" type="email" autocomplete="email" maxlength="255"></div>
+    </div>
+    <div class="rebuild-field"><label for="contract-message">Thời gian thuận tiện / ghi chú (không bắt buộc)</label><textarea id="contract-message" name="message" rows="4" maxlength="5000"></textarea></div>
+    <div class="hp" aria-hidden="true"><label for="contract-website">Website</label><input id="contract-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <p class="rebuild-form-status" role="status" aria-live="polite" data-form-status></p>
+    <button class="rebuild-btn rebuild-btn-accent" type="submit" data-label="Gửi yêu cầu ký hợp đồng">Gửi yêu cầu ký hợp đồng</button>
+  </form>
+</dialog>
+<dialog class="rebuild-dialog" id="smeup-dialog-cooperation" aria-labelledby="smeup-dialog-cooperation-title" data-smeup-dialog="cooperation">
+  <form class="lead-form rebuild-form" data-smeup-form="demo_cooperation_request" data-message-required="true" novalidate>
+    <button class="rebuild-dialog-close" type="button" data-dialog-close aria-label="Đóng">×</button>
+    <h2 id="smeup-dialog-cooperation-title">Trao đổi với đội ngũ Rebuild</h2>
+    <p>Bạn muốn thay đổi gì, hoặc cần thêm thông tin? Hãy cho chúng tôi biết.</p>
+    <div class="rebuild-field"><label for="cooperation-name">Họ và tên <span class="req">(bắt buộc)</span></label><input id="cooperation-name" name="name" type="text" autocomplete="name" maxlength="255" required></div>
+    <div class="rebuild-field-row">
+      <div class="rebuild-field"><label for="cooperation-phone">Số điện thoại</label><input id="cooperation-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20"></div>
+      <div class="rebuild-field"><label for="cooperation-email">Email</label><input id="cooperation-email" name="email" type="email" autocomplete="email" maxlength="255"></div>
+    </div>
+    <div class="rebuild-field"><label for="cooperation-message">Bạn muốn chỉnh sửa hoặc hỏi điều gì? <span class="req">(bắt buộc)</span></label><textarea id="cooperation-message" name="message" rows="4" maxlength="5000" required></textarea></div>
+    <div class="hp" aria-hidden="true"><label for="cooperation-website">Website</label><input id="cooperation-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <p class="rebuild-form-status" role="status" aria-live="polite" data-form-status></p>
+    <button class="rebuild-btn rebuild-btn-primary" type="submit" data-label="Gửi yêu cầu">Gửi yêu cầu</button>
+  </form>
+</dialog>

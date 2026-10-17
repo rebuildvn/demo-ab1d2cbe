@@ -1,0 +1,11 @@
+{
+  "name": "demo-ab1d2cbe",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "stitch:sync": "node scripts/sync-from-stitch.mjs",
+    "stitch:build": "node scripts/build-from-stitch.mjs",
+    "stitch:pull": "npm run stitch:sync && npm run stitch:build",
+    "serve": "python3 -m http.server 43123 --bind 127.0.0.1"
+  }
+}
