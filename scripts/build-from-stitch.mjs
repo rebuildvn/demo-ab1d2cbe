@@ -5,70 +5,22 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
+const runtimeOverlay = fs.readFileSync(path.join(root, 'stitch/overlays/smeup-runtime.html'), 'utf8');
 
-const source = path.join(root, 'stitch/export/home-desktop.html');
-const overlay = path.join(root, 'stitch/overlays/rebuild-smeup.html');
-const out = path.join(root, 'index.html');
-
-let html = fs.readFileSync(source, 'utf8');
-
-html = html.replace(
-  /<meta content="width=device-width, initial-scale=1.0" name="viewport"\/>/,
-  `<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="robots" content="noindex, nofollow"/>
+const HEAD_DESKTOP = `<meta name="robots" content="noindex, nofollow"/>
 <meta name="theme-color" content="#a82424"/>
 <link rel="canonical" href="https://demo-ab1d2cbe.demo.rebuild.vn/"/>
 <link rel="preconnect" href="https://api.smess.vn" crossorigin/>
-<link rel="stylesheet" href="/assets/css/rebuild-demo.css"/>`
-);
+<link rel="stylesheet" href="/assets/css/rebuild-demo.css"/>
+<script>(function(){if(/[?&]desktop=1/.test(location.search))return;if(window.matchMedia('(max-width:768px)').matches)location.replace('/m/'+location.hash);})();</script>`;
 
-html = html.replace(
-  /<form([^>]*id="booking-form"[^>]*) onsubmit="[^"]*"/,
-  '<form$1 data-smeup-form="contact_form" data-message-required="true" novalidate'
-);
+const HEAD_MOBILE = `<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#a82424"/>
+<link rel="canonical" href="https://demo-ab1d2cbe.demo.rebuild.vn/m/"/>
+<link rel="preconnect" href="https://api.smess.vn" crossorigin/>
+<link rel="stylesheet" href="/assets/css/rebuild-demo.css"/>`;
 
-const bookingFields = `
-<div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 pt-2 border-t border-koge-border/40">
-<div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md uppercase text-secondary tracking-wider" for="booking-name">Họ và tên</label>
-<input class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md focus:outline-none focus:ring-1 focus:ring-flame-amber" id="booking-name" name="name" type="text" autocomplete="name" required maxlength="255"/>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md uppercase text-secondary tracking-wider" for="booking-phone">Số điện thoại</label>
-<input class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md focus:outline-none focus:ring-1 focus:ring-flame-amber" id="booking-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20"/>
-</div>
-<textarea class="hidden" name="message" id="booking-message" aria-hidden="true" tabindex="-1"></textarea>
-<div class="hp" aria-hidden="true"><label for="booking-website">Website</label><input id="booking-website" name="website" type="text" tabindex="-1" autocomplete="off"/></div>
-<p class="sm:col-span-2 font-body-md text-body-md text-flame-amber min-h-[1.5em]" role="status" aria-live="polite" data-form-status></p>
-</div>`;
-
-html = html.replace(
-  /<!-- Field 5: Submit CTA -->/,
-  bookingFields + '\n<!-- Field 5: Submit CTA -->'
-);
-
-html = html.replace(
-  /<select class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md appearance-none focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" required="">/,
-  '<select class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md appearance-none focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" name="branch" required="">'
-);
-
-html = html.replace(
-  /<select class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md appearance-none focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" required="">\s*<option value="2">/,
-  '<select class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md appearance-none focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" name="guests" required="">\n<option value="2">'
-);
-
-html = html.replace(
-  /<input class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" required="" type="date"/,
-  '<input class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" name="date" required type="date"'
-);
-
-html = html.replace(
-  /<select class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md appearance-none focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" required="">\s*<option value="10:00">/,
-  '<select class="w-full h-12 px-3.5 bg-surface-container text-on-surface rounded font-body-md text-body-md appearance-none focus:outline-none focus:ring-1 focus:ring-flame-amber cursor-pointer" name="time" required="">\n<option value="10:00">'
-);
-
-const overlayHtml = fs.readFileSync(overlay, 'utf8');
-const scripts = `
+const RUNTIME_SCRIPTS = `
 <script src="/assets/js/site-config.js"></script>
 <script src="/assets/js/smeup-core.js" defer></script>
 <script src="/assets/js/contact-form.js" defer></script>
@@ -77,7 +29,61 @@ const scripts = `
 <script src="/assets/js/demo-cta.js" defer></script>
 `;
 
-html = html.replace('</body></html>', overlayHtml + scripts + '</body></html>');
+function injectHead(html, extra) {
+  return html.replace(
+    /<meta content="width=device-width[^"]*" name="viewport"\/>/,
+    (m) => `${m}\n${extra}`
+  );
+}
 
-fs.writeFileSync(out, html);
-console.log('Built', out, 'from Stitch export');
+function injectRuntime(html, insertBeforePattern) {
+  if (!html.includes(insertBeforePattern)) {
+    throw new Error(`Missing anchor: ${insertBeforePattern}`);
+  }
+  html = html.replace(insertBeforePattern, `${runtimeOverlay}\n${insertBeforePattern}`);
+  return html.replace('</body></html>', `${RUNTIME_SCRIPTS}</body></html>`);
+}
+
+function buildDesktop() {
+  const source = path.join(root, 'stitch/export/home-desktop.html');
+  let html = fs.readFileSync(source, 'utf8');
+
+  html = injectHead(html, HEAD_DESKTOP);
+
+  html = html.replace(
+    /<form([^>]*id="booking-form"[^>]*) onsubmit="[^"]*"/,
+    '<form$1 data-stitch-booking="desktop"'
+  );
+
+  html = injectRuntime(html, '<footer class="w-full bg-surface-container-lowest');
+
+  fs.writeFileSync(path.join(root, 'index.html'), html);
+  console.log('Built index.html (Stitch desktop, design-faithful)');
+}
+
+function buildMobile() {
+  const source = path.join(root, 'stitch/export/home-mobile.html');
+  let html = fs.readFileSync(source, 'utf8');
+
+  html = injectHead(html, HEAD_MOBILE);
+
+  html = html.replace(
+    /<form class="flex flex-col gap-4" id="fastBookingForm" onsubmit="[^"]*">/,
+    '<form class="flex flex-col gap-4" id="fastBookingForm" data-stitch-booking="mobile">'
+  );
+
+  html = html.replace(
+    /function handleBookingSubmit\(\) \{[\s\S]*?\n  \}/,
+    'function handleBookingSubmit() {\n    if (window.StitchBooking && window.StitchBooking.submitMobile) {\n      window.StitchBooking.submitMobile();\n    }\n  }'
+  );
+
+  html = injectRuntime(html, '<nav class="fixed bottom-0 w-full z-50 pb-safe');
+
+  const outDir = path.join(root, 'm');
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'index.html'), html);
+  console.log('Built m/index.html (Stitch mobile, design-faithful)');
+}
+
+buildDesktop();
+buildMobile();

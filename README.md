@@ -69,11 +69,18 @@ The demo rebuilds **https://gyusachi.vn/** (host `gyusachi.vn`): its text (busin
 | Desktop screen | `Trang Chủ - GYUSACHI Nhà Hàng Nướng Nhật` → `stitch/export/home-desktop.html` |
 | Mobile screen | `GYUSACHI Mobile - Đặt Bàn Nhanh` → `stitch/export/home-mobile.html` |
 
-The live demo homepage is built from Stitch, then patched with Rebuild/SMEUp hooks (booking → lead API, demo CTA dialogs, live chat).
+The demo serves **two Stitch screens** (no layout changes to the exported HTML):
+
+| URL | Stitch screen |
+|-----|----------------|
+| `/` | Desktop — Trang Chủ (1280px+ layout) |
+| `/m/` | Mobile — GYUSACHI Mobile (tab bar, branch pills, fast booking) |
+
+Phones (&lt;768px) auto-redirect from `/` to `/m/` unless `?desktop=1`. Rebuild/SMEUp hooks (booking leads, demo CTA, live chat) run via dialogs/scripts only.
 
 ```bash
 export STITCH_API_KEY='…'   # Stitch Settings → API Keys (never commit)
-npm run stitch:pull         # sync from MCP + rebuild index.html
+npm run stitch:pull         # sync from MCP + rebuild index + m/index
 npm run serve               # http://127.0.0.1:43123
 ```
 

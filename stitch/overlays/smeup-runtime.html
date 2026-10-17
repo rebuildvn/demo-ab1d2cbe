@@ -1,12 +1,25 @@
-<section class="w-full bg-[#1c1b1b] border-y border-koge-border py-16 px-gutter text-center" id="demo-cta" aria-labelledby="demo-cta-title">
-  <span class="inline-block px-3 py-1 rounded bg-crimson-enso/20 text-flame-amber font-label-md text-label-md uppercase tracking-wider mb-4">Bản demo</span>
-  <h2 id="demo-cta-title" class="font-headline-md text-headline-md text-washi-cream mb-3">Bạn hài lòng với website này?</h2>
-  <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-8">Đặt lịch ký hợp đồng để website chính thức hoạt động, hoặc trao đổi với đội ngũ Rebuild nếu bạn muốn chỉnh sửa.</p>
-  <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-    <button type="button" class="px-6 py-3 bg-crimson-enso hover:bg-crimson-glow text-washi-cream font-label-lg uppercase tracking-wider rounded shadow-lg transition-colors" data-smeup-cta="contract" data-cta-placement="final">Tôi đồng ý – Đặt lịch ký hợp đồng</button>
-    <button type="button" class="px-6 py-3 border border-koge-border text-washi-cream hover:border-flame-amber font-label-lg uppercase tracking-wider rounded transition-colors" data-smeup-cta="cooperation" data-cta-placement="final">Tôi muốn trao đổi / chỉnh sửa</button>
+<section class="w-full bg-charcoal-surface border-y border-koge-border/60 py-10 px-gutter text-center" id="demo-cta" aria-labelledby="demo-cta-title">
+  <span class="inline-block px-3 py-1 rounded bg-crimson-enso/25 text-flame-amber font-label-md text-label-md uppercase tracking-wider mb-3">Bản demo Rebuild</span>
+  <h2 id="demo-cta-title" class="font-headline-sm text-headline-sm text-washi-cream mb-2">Bạn hài lòng với website này?</h2>
+  <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mb-6">Đặt lịch ký hợp đồng hoặc trao đổi chỉnh sửa với đội ngũ Rebuild.</p>
+  <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+    <button type="button" class="px-5 py-2.5 bg-crimson-enso hover:bg-crimson-glow text-washi-cream font-label-md uppercase tracking-wider rounded transition-colors" data-smeup-cta="contract" data-cta-placement="final">Đặt lịch ký hợp đồng</button>
+    <button type="button" class="px-5 py-2.5 border border-koge-border text-washi-cream hover:border-flame-amber font-label-md uppercase tracking-wider rounded transition-colors" data-smeup-cta="cooperation" data-cta-placement="final">Trao đổi / chỉnh sửa</button>
   </div>
 </section>
+<dialog class="rebuild-dialog" id="stitch-booking-dialog" aria-labelledby="stitch-booking-dialog-title">
+  <form class="lead-form rebuild-form" id="stitch-booking-lead-form" data-message-required="true" novalidate>
+    <button class="rebuild-dialog-close" type="button" data-dialog-close aria-label="Đóng">×</button>
+    <h2 id="stitch-booking-dialog-title">Xác nhận đặt bàn</h2>
+    <p>Vui lòng để lại họ tên và số điện thoại để GYUSACHI liên hệ xác nhận.</p>
+    <div class="rebuild-field"><label for="stitch-booking-name">Họ và tên <span class="req">(bắt buộc)</span></label><input id="stitch-booking-name" name="name" type="text" autocomplete="name" maxlength="255" required></div>
+    <div class="rebuild-field"><label for="stitch-booking-phone">Số điện thoại <span class="req">(bắt buộc)</span></label><input id="stitch-booking-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" required></div>
+    <textarea class="hidden" name="message" id="stitch-booking-message"></textarea>
+    <div class="hp" aria-hidden="true"><label for="stitch-booking-website">Website</label><input id="stitch-booking-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <p class="rebuild-form-status" role="status" aria-live="polite" data-form-status></p>
+    <button class="rebuild-btn rebuild-btn-accent" type="submit" data-label="Gửi yêu cầu đặt bàn">Gửi yêu cầu đặt bàn</button>
+  </form>
+</dialog>
 <dialog class="rebuild-dialog" id="smeup-dialog-contract" aria-labelledby="smeup-dialog-contract-title" data-smeup-dialog="contract">
   <form class="lead-form rebuild-form" data-smeup-form="demo_contract_request" data-message-required="false" novalidate>
     <button class="rebuild-dialog-close" type="button" data-dialog-close aria-label="Đóng">×</button>
